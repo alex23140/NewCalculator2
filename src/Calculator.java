@@ -16,7 +16,7 @@ public class Calculator {
             }
 
             if (Validator.inputElementsSameTypeCheck(input[0], input[2])) {
-                throw new Exception("Ошибка: Введённые операнды разного типа");
+                throw new Exception("Ошибка: Введённые числа разного типа");
             }
 
             boolean inputIsRoman = !Character.isDigit(input[0].charAt(0));

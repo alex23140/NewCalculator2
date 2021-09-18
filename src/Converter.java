@@ -20,21 +20,38 @@ public class Converter {
 
         int result = 0;
 
-        for (int i = 0; i < a.length(); i++) {
+        for (int i=0; i<a.length(); i++ ){
             Character ch = a.charAt(i);
             if (!numRome.containsKey(ch)) {
-                throw new RuntimeException("Ошибка: Введены римские цифры неверного формата");
+               throw new RuntimeException("Ошибка: Введены римские цифры неверного формата");
             }
-            result += numRome.get(a.charAt(i));
+        }
+        for (int i=0 ;i<a.length(); i++){
+            Character ch = a.charAt(i);
+            if(i<a.length()-1) {
+                Character nextCh = a.charAt(i + 1);
+                if (numRome.get(ch) < numRome.get(nextCh)) {
+                    if (ch == 'V' && nextCh == 'X') {
+                        throw new RuntimeException("Ошибка: Введены несуществующие римские цифры");
+                    }
+                    if (i!=0){
+                        Character prevCh= a.charAt(i-1);
+                        if(numRome.get(ch)<=numRome.get(prevCh)){
+                            throw new RuntimeException("Ошибка: Введены несуществующие римские цифры");
+                        }
+                    }
+                    result += numRome.get(nextCh) - numRome.get(ch);
+                    i++;
+                } else {
+                    result += numRome.get(ch);
+
+                }
+            }
+            else {
+                result+=numRome.get(ch);
+            }
         }
 
-        for (int i = 0; i < a.length() - 1; i++) {
-            Character ch = a.charAt(i);
-            Character nextCh = a.charAt(i + 1);
-            if (numRome.get(ch) < numRome.get(nextCh)) {
-                result-= 2;
-            }
-        }
 
         if (result > 10) {
             throw new RuntimeException("Ошибка: Введены римские числа превышающие 10");
