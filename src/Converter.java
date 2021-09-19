@@ -72,6 +72,7 @@ public class Converter {
         numRome.put(9, "IX");
         numRome.put(10, "X");
         numRome.put(50, "L");
+        numRome.put(90, "XC");
         numRome.put(100, "C");
 
         if (a <= 0) {
@@ -85,6 +86,9 @@ public class Converter {
             if (num >= 100)  {
                 result += numRome.get(100);
                 num -= 100;
+            } else if (num >= 90)  {
+                result += numRome.get(90);
+                num -= 90;
             } else if (num >= 50)  {
                 result += numRome.get(50);
                 num -= 50;
